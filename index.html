@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
+
 <head>
     <meta charset="UTF-8" />
     <title>AlokaHub Pro</title>
@@ -10,36 +11,97 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <style>
-        /* Font Support for Mixed Scripts */
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&family=Inter:wght@400;600;800&display=swap');
-        
-        body { font-family: 'Inter', 'Noto Sans Sinhala', sans-serif; }
-        
-        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-        .dark .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; }
-        
-        #sidebar { transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .sidebar-collapsed { width: 80px !important; }
-        .sidebar-collapsed .collapsed-hide { display: none; }
-        .sidebar-collapsed .collapsed-center { justify-content: center; padding-left: 0; padding-right: 0; }
 
-        .typing-dot { animation: typing 1.4s infinite; }
-        @keyframes typing { 0%, 80%, 100% { opacity: 0; } 40% { opacity: 1; } }
+        body {
+            font-family: 'Inter', 'Noto Sans Sinhala', sans-serif;
+        }
 
-        .pro-text-main { color: #0f172a; }
-        .dark .pro-text-main { color: #f8fafc; }
-        
-        pre { background: #1e293b; color: #f8fafc; padding: 1rem; border-radius: 0.75rem; overflow-x: auto; margin: 0.5rem 0; }
-        code { font-family: ui-monospace, monospace; font-size: 0.9em; }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+
+        #sidebar {
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sidebar-collapsed {
+            width: 80px !important;
+        }
+
+        .sidebar-collapsed .collapsed-hide {
+            display: none;
+        }
+
+        .sidebar-collapsed .collapsed-center {
+            justify-content: center;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .typing-dot {
+            animation: typing 1.4s infinite;
+        }
+
+        @keyframes typing {
+
+            0%,
+            80%,
+            100% {
+                opacity: 0;
+            }
+
+            40% {
+                opacity: 1;
+            }
+        }
+
+        .pro-text-main {
+            color: #0f172a;
+        }
+
+        .dark .pro-text-main {
+            color: #f8fafc;
+        }
+
+        pre {
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            overflow-x: auto;
+            margin: 0.5rem 0;
+        }
+
+        code {
+            font-family: ui-monospace, monospace;
+            font-size: 0.9em;
+        }
     </style>
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
-                    colors: { brand: { 500: '#6366f1', 600: '#4f46e5' } }
+                    colors: {
+                        brand: {
+                            500: '#6366f1',
+                            600: '#4f46e5'
+                        }
+                    }
                 }
             }
         }
@@ -47,312 +109,478 @@
 </head>
 
 <body class="h-full bg-slate-50 dark:bg-slate-950 transition-colors duration-300 antialiased">
-<div id="app" class="flex h-full overflow-hidden">
+    <div id="app" class="flex h-full overflow-hidden">
 
-    <aside id="sidebar" class="relative z-50 w-72 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col hidden md:flex">
-        <button id="toggleSidebar" class="absolute -right-3 top-20 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full p-1 shadow-md hover:text-brand-500 z-50 transition-all">
-            <i data-lucide="chevron-left" id="collapseIcon" class="w-4 h-4"></i>
-        </button>
+        <aside id="sidebar"
+            class="relative z-50 w-72 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col hidden md:flex">
+            <button id="toggleSidebar"
+                class="absolute -right-3 top-20 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full p-1 shadow-md hover:text-brand-500 z-50 transition-all">
+                <i data-lucide="chevron-left" id="collapseIcon" class="w-4 h-4 text-slate-600 dark:text-slate-400"></i>
+            </button>
 
-        <div class="p-6 flex items-center gap-3 overflow-hidden">
-            <div class="min-w-[32px] w-8 h-8 bg-brand-500 rounded-lg flex items-center justify-center text-white shadow-lg shadow-brand-500/20">
-                <i data-lucide="zap" class="w-5 h-5"></i>
+            <div class="p-6 flex items-center gap-3 overflow-hidden">
+                <div
+                    class="min-w-[32px] w-8 h-8 bg-brand-500 rounded-lg flex items-center justify-center text-white shadow-lg shadow-brand-500/20">
+                    <i data-lucide="zap" class="w-5 h-5"></i>
+                </div>
+                <h1 class="font-bold text-xl tracking-tight collapsed-hide whitespace-nowrap pro-text-main"
+                    data-i18n="appName">AlokaHub</h1>
             </div>
-            <h1 class="font-bold text-xl tracking-tight collapsed-hide whitespace-nowrap pro-text-main" data-i18n="appName">AlokaHub</h1>
-        </div>
 
-        <nav class="flex-1 px-4 space-y-2 overflow-y-auto custom-scrollbar">
-            <button id="exportPDF" class="flex items-center gap-3 w-full px-4 py-3 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-all text-slate-600 dark:text-slate-400 collapsed-center" title="Export PDF">
-                <i data-lucide="file-text" class="w-5 h-5 min-w-[20px]"></i>
-                <span class="font-medium collapsed-hide" data-i18n="exportPdf">Export PDF</span>
-            </button>
-            <button id="clearChat" class="flex items-center gap-3 w-full px-4 py-3 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 transition-all text-slate-600 dark:text-slate-400 hover:text-red-600 collapsed-center" title="Clear Chat">
-                <i data-lucide="trash-2" class="w-5 h-5 min-w-[20px]"></i>
-                <span class="font-medium collapsed-hide" data-i18n="clearChat">Clear History</span>
-            </button>
-            <button id="toggleTheme" class="flex items-center gap-3 w-full px-4 py-3 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-all text-slate-600 dark:text-slate-400 collapsed-center" title="Appearance">
-                <i data-lucide="sun" class="hidden dark:block w-5 h-5 min-w-[20px]"></i>
-                <i data-lucide="moon" class="block dark:hidden w-5 h-5 min-w-[20px]"></i>
-                <span class="font-medium collapsed-hide" data-i18n="theme">Theme</span>
-            </button>
-        </nav>
-
-        <div class="p-4 border-t border-slate-100 dark:border-slate-800">
-            <button id="langToggle" class="w-full flex items-center justify-center gap-2 py-2 text-[10px] font-bold text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white uppercase tracking-widest collapsed-center transition-all">
-                <span class="collapsed-hide" id="langLabel">English</span>
-                <i data-lucide="languages" class="w-4 h-4 min-w-[16px]"></i>
-            </button>
-        </div>
-    </aside>
-
-    <main class="flex-1 flex flex-col min-w-0 bg-white dark:bg-slate-950 relative">
-        <header class="h-16 flex items-center justify-between px-4 md:px-6 border-b border-slate-100 dark:border-slate-900 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md sticky top-0 z-10">
-            <div class="flex items-center gap-3">
-                <button class="md:hidden p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg" onclick="document.getElementById('sidebar').classList.toggle('hidden'); document.getElementById('sidebar').classList.toggle('flex');">
-                    <i data-lucide="menu" class="w-5 h-5"></i>
+            <nav class="flex-1 px-4 space-y-2 overflow-y-auto custom-scrollbar">
+                <button id="exportPDF"
+                    class="flex items-center gap-3 w-full px-4 py-3 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-all text-slate-600 dark:text-slate-400 collapsed-center"
+                    title="Export PDF">
+                    <i data-lucide="file-text" class="w-5 h-5 min-w-[20px]"></i>
+                    <span class="font-medium collapsed-hide" data-i18n="exportPdf">Export PDF</span>
                 </button>
-                <select id="modelSelect" class="bg-slate-100 dark:bg-slate-800 text-[11px] font-bold px-4 py-1.5 rounded-full border-none focus:ring-2 focus:ring-brand-500 outline-none cursor-pointer hover:bg-slate-200 transition-colors uppercase tracking-widest text-slate-600 dark:text-slate-300 shadow-sm"></select>
-            </div>
-            
-            <div class="flex items-center gap-2">
-                <button id="openSettingsTop" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-slate-500 hover:text-brand-500 hover:bg-brand-50 dark:hover:bg-brand-900/20 transition-all group">
-                    <i data-lucide="settings" class="w-4 h-4 group-hover:rotate-45 transition-transform duration-300"></i>
-                    <span class="text-xs font-bold uppercase tracking-wider hidden sm:inline" data-i18n="settings">Settings</span>
+                <button id="clearChat"
+                    class="flex items-center gap-3 w-full px-4 py-3 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 transition-all text-slate-600 dark:text-slate-400 hover:text-red-600 collapsed-center"
+                    title="Clear Chat">
+                    <i data-lucide="trash-2" class="w-5 h-5 min-w-[20px]"></i>
+                    <span class="font-medium collapsed-hide" data-i18n="clearChat">Clear History</span>
                 </button>
-                <div class="h-4 w-[1px] bg-slate-200 dark:bg-slate-800 mx-1"></div>
-                <div class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]"></div>
+                <button id="toggleTheme"
+                    class="flex items-center gap-3 w-full px-4 py-3 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-all text-slate-600 dark:text-slate-400 collapsed-center"
+                    title="Appearance">
+                    <i data-lucide="sun" class="hidden dark:block w-5 h-5 min-w-[20px]"></i>
+                    <i data-lucide="moon" class="block dark:hidden w-5 h-5 min-w-[20px]"></i>
+                    <span class="font-medium collapsed-hide" data-i18n="theme">Theme</span>
+                </button>
+            </nav>
+
+            <div class="p-4 border-t border-slate-100 dark:border-slate-800">
+                <button id="langToggle"
+                    class="w-full flex items-center justify-center gap-2 py-2 text-[10px] font-bold text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white uppercase tracking-widest collapsed-center transition-all">
+                    <span class="collapsed-hide" id="langLabel">English</span>
+                    <i data-lucide="languages" class="w-4 h-4 min-w-[16px]"></i>
+                </button>
             </div>
-        </header>
+        </aside>
 
-        <div id="chat" class="flex-1 overflow-y-auto p-4 md:p-10 space-y-8 custom-scrollbar"></div>
+        <main class="flex-1 flex flex-col min-w-0 bg-white dark:bg-slate-950 relative">
+            <header
+                class="h-16 flex items-center justify-between px-4 md:px-6 border-b border-slate-100 dark:border-slate-900 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md sticky top-0 z-10">
+                <div class="flex items-center gap-3">
+                    <button
+                        class="md:hidden p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-900 dark:text-white"
+                        onclick="document.getElementById('sidebar').classList.toggle('hidden'); document.getElementById('sidebar').classList.toggle('flex');">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                    <select id="modelSelect"
+                        class="bg-slate-100 dark:bg-slate-800 text-[11px] font-bold px-4 py-1.5 rounded-full border-none focus:ring-2 focus:ring-brand-500 outline-none cursor-pointer hover:bg-slate-200 transition-colors uppercase tracking-widest text-slate-600 dark:text-slate-300 shadow-sm"></select>
+                </div>
 
-        <div class="p-4 md:p-8 bg-gradient-to-t from-white via-white to-transparent dark:from-slate-950 dark:via-slate-950">
-            <div class="max-w-3xl mx-auto">
-                <div class="flex items-end gap-3 bg-slate-100 dark:bg-slate-900/60 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 focus-within:border-brand-500 focus-within:bg-white dark:focus-within:bg-slate-900 transition-all shadow-sm">
-                    <textarea id="messageInput" rows="1" class="flex-1 bg-transparent border-none focus:ring-0 resize-none py-2 px-3 pro-text-main placeholder-slate-400" placeholder="Type something amazing..."></textarea>
-                    <button id="sendBtn" class="bg-brand-500 hover:bg-brand-600 text-white p-3 rounded-xl transition-all shadow-lg shadow-brand-500/20 active:scale-95">
-                        <i data-lucide="send-horizonal" class="w-5 h-5"></i>
+                <div class="flex items-center gap-1.5 sm:gap-2">
+                    <div id="balanceDisplay"
+                        class="hidden flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg transition-all duration-500 border">
+                        <i data-lucide="coins" class="w-3 h-3 sm:w-3.5 sm:h-3.5" id="balanceIcon"></i>
+                        <span id="creditAmount"
+                            class="text-[10px] sm:text-[11px] font-bold tabular-nums whitespace-nowrap">0 Credits</span>
+                    </div>
+
+                    <div class="h-4 w-[1px] bg-slate-200 dark:bg-slate-800 mx-1"></div>
+                    <button id="openSettingsTop"
+                        class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-slate-500 hover:text-brand-500 hover:bg-brand-50 dark:hover:bg-brand-900/20 transition-all group">
+                        <i data-lucide="settings"
+                            class="w-4 h-4 group-hover:rotate-45 transition-transform duration-300"></i>
+                        <span class="text-xs font-bold uppercase tracking-wider hidden sm:inline"
+                            data-i18n="settings">Settings</span>
+                    </button>
+                    <div class="h-4 w-[1px] bg-slate-200 dark:bg-slate-800 mx-1"></div>
+                    <div class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]"></div>
+                </div>
+            </header>
+
+            <div id="chat" class="flex-1 overflow-y-auto p-4 md:p-10 space-y-8 custom-scrollbar"></div>
+
+            <div
+                class="p-4 md:p-8 bg-gradient-to-t from-white via-white to-transparent dark:from-slate-950 dark:via-slate-950">
+                <div class="max-w-3xl mx-auto">
+                    <div
+                        class="flex items-end gap-3 bg-slate-100 dark:bg-slate-900/60 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 focus-within:border-brand-500 focus-within:bg-white dark:focus-within:bg-slate-900 transition-all shadow-sm">
+                        <textarea id="messageInput" rows="1"
+                            class="flex-1 bg-transparent border-none focus:ring-0 resize-none py-2 px-3 pro-text-main placeholder-slate-400"
+                            placeholder="Type something amazing..."></textarea>
+                        <button id="sendBtn"
+                            class="bg-brand-500 hover:bg-brand-600 text-white p-3 rounded-xl transition-all shadow-lg shadow-brand-500/20 active:scale-95">
+                            <i data-lucide="send-horizonal" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="settingsModal"
+        class="fixed inset-0 z-[60] hidden backdrop-blur-sm bg-slate-900/40 items-center justify-center p-4">
+        <div
+            class="bg-white dark:bg-slate-900 w-full max-w-md rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+            <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+                <h2 class="text-xl font-bold pro-text-main" data-i18n="globalSettings">Global Settings</h2>
+                <button onclick="closeSettings()" class="text-slate-400 hover:text-slate-600 transition-colors p-1">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-5">
+                <div class="space-y-1">
+                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest"
+                        data-i18n="baseUrl">Base URL</label>
+                    <input id="baseUrl"
+                        class="w-full px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border-none focus:ring-2 focus:ring-brand-500 text-sm pro-text-main" />
+                </div>
+                <div class="space-y-1">
+                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest" data-i18n="apiKey">API
+                        Key</label>
+                    <div class="relative group">
+                        <input id="apiKey" type="password"
+                            class="w-full px-4 py-2.5 pr-12 rounded-xl bg-slate-100 dark:bg-slate-800 border-none focus:ring-2 focus:ring-brand-500 text-sm transition-all pro-text-main"
+                            placeholder="sk-..." />
+                        <button id="toggleApiKey" type="button"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-brand-500 transition-colors p-1">
+                            <i data-lucide="eye" class="w-4 h-4" id="eyeIcon"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="space-y-1">
+                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest"
+                        data-i18n="systemInst">System Instruction</label>
+                    <textarea id="systemPrompt"
+                        class="w-full px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border-none focus:ring-2 focus:ring-brand-500 text-sm resize-none pro-text-main"
+                        rows="3"></textarea>
+                </div>
+                <div class="pt-2">
+                    <button onclick="saveSettings()" id="saveSettingsBtn"
+                        class="w-full py-4 bg-brand-500 text-white rounded-2xl font-bold hover:bg-brand-600 transition-all shadow-lg shadow-brand-500/30 active:scale-[0.98]"
+                        data-i18n="saveConfig">
+                        Save Configuration
                     </button>
                 </div>
             </div>
         </div>
-    </main>
-</div>
-
-<div id="settingsModal" class="fixed inset-0 z-[60] hidden backdrop-blur-sm bg-slate-900/40 items-center justify-center p-4">
-    <div class="bg-white dark:bg-slate-900 w-full max-w-md rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800">
-        <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
-            <h2 class="text-xl font-bold pro-text-main" data-i18n="globalSettings">Global Settings</h2>
-            <button onclick="closeSettings()" class="text-slate-400 hover:text-slate-600 transition-colors p-1"><i data-lucide="x" class="w-5 h-5"></i></button>
-        </div>
-        <div class="p-6 space-y-5">
-            <div class="space-y-1">
-                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest" data-i18n="baseUrl">Base URL</label>
-                <input id="baseUrl" class="w-full px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border-none focus:ring-2 focus:ring-brand-500 text-sm" />
-            </div>
-            <div class="space-y-1">
-                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest" data-i18n="apiKey">API Key</label>
-                <input id="apiKey" type="password" class="w-full px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border-none focus:ring-2 focus:ring-brand-500 text-sm" placeholder="sk-..." />
-            </div>
-            <div class="space-y-1">
-                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest" data-i18n="systemInst">System Instruction</label>
-                <textarea id="systemPrompt" class="w-full px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border-none focus:ring-2 focus:ring-brand-500 text-sm resize-none" rows="3"></textarea>
-            </div>
-            <button onclick="saveSettings()" id="saveSettingsBtn" class="w-full py-4 bg-brand-500 text-white rounded-2xl font-bold hover:bg-brand-600 transition-all shadow-lg shadow-brand-500/30" data-i18n="saveConfig">Save Configuration</button>
-        </div>
     </div>
-</div>
 
-<script>
-    const initIcons = () => lucide.createIcons();
-    initIcons();
-
-    /* --- Configuration --- */
-    const DEFAULT_BASE_URL = "https://ai.alokahub.com/";
-    const TARGET_MODELS = ["gemini-3-flash", "gpt-5-mini", "claude-4.5-haiku", "deepseek-v3.2"];
-    const DEFAULT_SYSTEM = "You are a helpful AI assistant. Respond using markdown.";
-
-    if (!localStorage.baseUrl) localStorage.baseUrl = DEFAULT_BASE_URL;
-    if (!localStorage.systemPrompt) localStorage.systemPrompt = DEFAULT_SYSTEM;
-    localStorage.models = JSON.stringify(TARGET_MODELS);
-
-    /* --- Localization Engine --- */
-    const translations = {
-        en: {
-            appName: "AlokaHub",
-            exportPdf: "Export PDF",
-            clearChat: "Clear History",
-            theme: "Appearance",
-            settings: "Settings",
-            globalSettings: "Global Settings",
-            baseUrl: "Base URL",
-            apiKey: "API Key",
-            systemInst: "System Instruction",
-            saveConfig: "Save Configuration",
-            placeholder: "Type something amazing...",
-            toggleLabel: "සිංහල",
-            welcome: "Ready to assist"
-        },
-        si: {
-            appName: "AlokaHub",
-            exportPdf: "PDF ලෙස ගන්න",
-            clearChat: "ඉතිහාසය මකන්න",
-            theme: "තේමාව",
-            settings: "සැකසුම්",
-            globalSettings: "ප්‍රධාන සැකසුම්",
-            baseUrl: "මූලික URL ලිපිනය",
-            apiKey: "API යතුර",
-            systemInst: "පද්ධති උපදෙස් (System Prompt)",
-            saveConfig: "සුරකින්න",
-            placeholder: "මෙහි ටයිප් කරන්න...",
-            toggleLabel: "English",
-            welcome: "ඔබට සහය වීමට සූදානම්"
-        }
-    };
-
-    let currentLang = localStorage.lang || "en";
-
-    function updateLanguage() {
-        const t = translations[currentLang];
-        document.querySelectorAll("[data-i18n]").forEach(el => {
-            const key = el.getAttribute("data-i18n");
-            if (t[key]) el.textContent = t[key];
-        });
-        document.getElementById("messageInput").placeholder = t.placeholder;
-        document.getElementById("langLabel").textContent = t.toggleLabel;
-        document.title = currentLang === 'si' ? "AlokaHub | සිංහල" : "AlokaHub | Pro";
-    }
-
-    document.getElementById("langToggle").onclick = () => {
-        currentLang = currentLang === "en" ? "si" : "en";
-        localStorage.lang = currentLang;
-        updateLanguage();
-    };
-    updateLanguage();
-
-    /* --- Sidebar & UI Logic --- */
-    const sidebar = document.getElementById("sidebar");
-    const collapseIcon = document.getElementById("collapseIcon");
-    document.getElementById("toggleSidebar").onclick = () => {
-        sidebar.classList.toggle("sidebar-collapsed");
-        const isCollapsed = sidebar.classList.contains("sidebar-collapsed");
-        collapseIcon.style.transform = isCollapsed ? "rotate(180deg)" : "rotate(0deg)";
-        localStorage.sidebarCollapsed = isCollapsed;
-    };
-    if (localStorage.sidebarCollapsed === "true") {
-        sidebar.classList.add("sidebar-collapsed");
-        collapseIcon.style.transform = "rotate(180deg)";
-    }
-
-    document.getElementById("toggleTheme").onclick = () => {
-        document.documentElement.classList.toggle("dark");
-        localStorage.theme = document.documentElement.classList.contains("dark") ? "dark" : "light";
-    };
-    if (localStorage.theme === "dark") document.documentElement.classList.add("dark");
-
-    const settingsModal = document.getElementById("settingsModal");
-    const openSettings = () => {
-        settingsModal.classList.remove("hidden");
-        settingsModal.classList.add("flex");
-        document.getElementById("baseUrl").value = localStorage.baseUrl;
-        document.getElementById("apiKey").value = localStorage.apiKey || "";
-        document.getElementById("systemPrompt").value = localStorage.systemPrompt;
-    };
-    document.getElementById("openSettingsTop").onclick = openSettings;
-    const closeSettings = () => settingsModal.classList.add("hidden");
-    function saveSettings() {
-        localStorage.baseUrl = document.getElementById("baseUrl").value;
-        localStorage.apiKey = document.getElementById("apiKey").value;
-        localStorage.systemPrompt = document.getElementById("systemPrompt").value;
-        closeSettings();
-    }
-    document.getElementById("saveSettingsBtn").onclick = saveSettings;
-
-    let models = JSON.parse(localStorage.models);
-    const modelSelect = document.getElementById("modelSelect");
-    function refreshModels() {
-        modelSelect.innerHTML = "";
-        models.forEach(m => {
-            const o = document.createElement("option");
-            o.value = m; o.textContent = m;
-            modelSelect.appendChild(o);
-        });
-    }
-    refreshModels();
-
-    const chatEl = document.getElementById("chat");
-    let messages = JSON.parse(localStorage.chat || "[]");
-    let isTyping = false;
-
-    function renderChat() {
-        if (messages.length === 0) {
-            const t = translations[currentLang];
-            chatEl.innerHTML = `<div class="h-full flex flex-col items-center justify-center opacity-10 select-none"><i data-lucide="layout" class="w-20 h-20 mb-4"></i><span class="font-black text-3xl uppercase tracking-widest text-center">${t.welcome}</span></div>`;
-        } else {
-            chatEl.innerHTML = "";
-            messages.forEach((m) => {
-                const isUser = m.role === "user";
-                const div = document.createElement("div");
-                div.className = `flex ${isUser ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`;
-                const bubbleClasses = isUser ? 'bg-brand-500 text-white rounded-2xl rounded-tr-none shadow-md' : 'bg-white dark:bg-slate-800 pro-text-main rounded-2xl rounded-tl-none border border-slate-200 dark:border-slate-800 shadow-sm';
-                div.innerHTML = `<div class="max-w-[85%] md:max-w-[75%] px-6 py-4 ${bubbleClasses}"><div class="prose dark:prose-invert text-[15px] leading-relaxed max-w-none font-sans">${marked.parse(m.content)}</div></div>`;
-                chatEl.appendChild(div);
-            });
-        }
-        if (isTyping) {
-            const typing = document.createElement("div");
-            typing.className = "flex justify-start";
-            typing.innerHTML = `<div class="bg-slate-100 dark:bg-slate-800 px-5 py-4 rounded-2xl rounded-tl-none flex gap-1.5"><div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot"></div><div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot [animation-delay:0.2s]"></div><div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot [animation-delay:0.4s]"></div></div>`;
-            chatEl.appendChild(typing);
-        }
-        chatEl.scrollTop = chatEl.scrollHeight;
-        localStorage.chat = JSON.stringify(messages);
+    <script>
+        const initIcons = () => lucide.createIcons();
         initIcons();
-    }
 
-    async function sendMessage() {
-        const input = document.getElementById("messageInput");
-        const text = input.value.trim();
-        if (!text || isTyping) return;
-        messages.push({ role: "user", content: text });
-        input.value = "";
-        input.style.height = 'auto';
-        isTyping = true;
-        renderChat();
-        const reqMsgs = [{ role: "system", content: localStorage.systemPrompt }, ...messages];
-        try {
-            const url = localStorage.baseUrl.replace(/\/$/, '') + '/v1/chat/completions';
-            const res = await fetch(url, {
-                method: "POST",
-                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.apiKey}` },
-                body: JSON.stringify({ model: modelSelect.value, messages: reqMsgs })
+        /* --- Configuration --- */
+        const DEFAULT_BASE_URL = "https://ai.alokahub.com/";
+        const TARGET_MODELS = ["gemini-3-flash", "gpt-5-mini", "claude-4.5-haiku", "deepseek-v3.2"];
+        const DEFAULT_SYSTEM = "You are a helpful AI assistant. Respond using markdown.";
+
+        if (!localStorage.baseUrl) localStorage.baseUrl = DEFAULT_BASE_URL;
+        if (!localStorage.systemPrompt) localStorage.systemPrompt = DEFAULT_SYSTEM;
+        localStorage.models = JSON.stringify(TARGET_MODELS);
+
+        /* --- Localization Engine --- */
+        const translations = {
+            en: {
+                appName: "AlokaHub",
+                exportPdf: "Export PDF",
+                clearChat: "Clear History",
+                theme: "Appearance",
+                settings: "Settings",
+                globalSettings: "Global Settings",
+                baseUrl: "Base URL",
+                apiKey: "API Key",
+                systemInst: "System Instruction",
+                saveConfig: "Save Configuration",
+                placeholder: "Type something amazing...",
+                toggleLabel: "සිංහල",
+                credits: "Credits",
+                welcome: "Ready to assist"
+            },
+            si: {
+                appName: "AlokaHub",
+                exportPdf: "PDF ලෙස ගන්න",
+                clearChat: "ඉතිහාසය මකන්න",
+                theme: "තේමාව",
+                settings: "සැකසුම්",
+                globalSettings: "ප්‍රධාන සැකසුම්",
+                baseUrl: "මූලික URL ලිපිනය",
+                apiKey: "API යතුර",
+                systemInst: "පද්ධති උපදෙස් (System Prompt)",
+                saveConfig: "සුරකින්න",
+                placeholder: "මෙහි ටයිප් කරන්න...",
+                toggleLabel: "English",
+                credits: "ක්‍රෙඩිට්",
+                welcome: "ඔබට සහය වීමට සූදානම්"
+            }
+        };
+
+        let currentLang = localStorage.lang || "en";
+
+        function updateLanguage() {
+            const t = translations[currentLang];
+            document.querySelectorAll("[data-i18n]").forEach(el => {
+                const key = el.getAttribute("data-i18n");
+                if (t[key]) el.textContent = t[key];
             });
-            if (!res.ok) throw new Error("Connection Error");
-            const data = await res.json();
-            messages.push({ role: "assistant", content: data.choices[0].message.content });
-        } catch (err) {
-            messages.push({ role: "assistant", content: `**System Error:** Connection failed. Please check your settings.` });
-        } finally {
-            isTyping = false;
-            renderChat();
+            document.getElementById("messageInput").placeholder = t.placeholder;
+            document.getElementById("langLabel").textContent = t.toggleLabel;
+
+            updateBalance();
+            document.title = currentLang === 'si' ? "AlokaHub | සිංහල" : "AlokaHub | Pro";
         }
-    }
 
-    document.getElementById("exportPDF").onclick = () => {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-        if(currentLang === 'si') alert("Note: PDF generation for Sinhala requires custom embedded fonts. The export will use standard encoding.");
-        
-        let y = 20;
-        doc.setFontSize(20);
-        doc.text("AlokaHub Conversation", 20, y);
-        y += 15;
-        messages.forEach(m => {
-            doc.setFontSize(10);
-            doc.setFont("helvetica", "bold");
-            doc.text(`${m.role.toUpperCase()}:`, 20, y);
-            y += 7;
-            doc.setFont("helvetica", "normal");
-            const lines = doc.splitTextToSize(m.content.replace(/[#*`]/g, ''), 170);
-            doc.text(lines, 20, y);
-            y += (lines.length * 5) + 10;
-            if (y > 270) { doc.addPage(); y = 20; }
+        /* --- Corrected Credit System Logic --- */
+        async function updateBalance() {
+            const apiKey = localStorage.apiKey;
+            const baseUrl = (localStorage.baseUrl || "").replace(/\/$/, '');
+            const display = document.getElementById("balanceDisplay");
+            const amountLabel = document.getElementById("creditAmount");
+
+            if (!apiKey || !baseUrl) {
+                if (display) display.classList.add("hidden");
+                return;
+            }
+
+            try {
+                const cleanBase = baseUrl.replace(/\/v1$/, '');
+                const res = await fetch(`${cleanBase}/key/info`, {
+                    headers: { "Authorization": `Bearer ${apiKey}` }
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+
+                    // The JSON you provided nests the values inside the "info" object
+                    const info = data.info || {};
+                    const maxBudget = parseFloat(info.max_budget) || 0;
+                    const spend = parseFloat(info.spend) || 0;
+
+                    // Calculation: (max budget - spend) * 1000
+                    const remainingUSD = Math.max(0, maxBudget - spend);
+                    const credits = Math.round(remainingUSD * 1000);
+
+                    const label = translations[currentLang].credits;
+                    amountLabel.textContent = `${credits.toLocaleString()} ${label}`;
+
+                    // Update UI Colors
+                    display.className = "flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg transition-all duration-500 border";
+                    if (credits < 100) {
+                        display.classList.add("bg-red-50", "dark:bg-red-900/20", "border-red-200", "dark:border-red-800", "text-red-600", "dark:text-red-400", "animate-pulse");
+                    } else if (credits < 500) {
+                        display.classList.add("bg-amber-50", "dark:bg-amber-900/20", "border-amber-200", "dark:border-amber-800", "text-amber-600", "dark:text-amber-400");
+                    } else {
+                        display.classList.add("bg-emerald-50", "dark:bg-emerald-900/20", "border-emerald-200", "dark:border-emerald-800", "text-emerald-600", "dark:text-emerald-400");
+                    }
+                    display.classList.remove("hidden");
+                }
+            } catch (err) {
+                console.warn("Balance sync failed.");
+                if (display) display.classList.add("hidden");
+            }
+        }
+
+        /* --- Fixed Language Toggle --- */
+        document.getElementById("langToggle").onclick = () => {
+            currentLang = currentLang === "en" ? "si" : "en";
+            localStorage.lang = currentLang;
+            updateLanguage();
+            // We call updateBalance again to ensure the "Credits" text changes language immediately
+            updateBalance();
+        };
+
+        /* --- Sidebar & UI Logic --- */
+        const sidebar = document.getElementById("sidebar");
+        const collapseIcon = document.getElementById("collapseIcon");
+        document.getElementById("toggleSidebar").onclick = () => {
+            sidebar.classList.toggle("sidebar-collapsed");
+            const isCollapsed = sidebar.classList.contains("sidebar-collapsed");
+            collapseIcon.style.transform = isCollapsed ? "rotate(180deg)" : "rotate(0deg)";
+            localStorage.sidebarCollapsed = isCollapsed;
+        };
+        if (localStorage.sidebarCollapsed === "true") {
+            sidebar.classList.add("sidebar-collapsed");
+            collapseIcon.style.transform = "rotate(180deg)";
+        }
+
+        document.getElementById("toggleTheme").onclick = () => {
+            document.documentElement.classList.toggle("dark");
+            localStorage.theme = document.documentElement.classList.contains("dark") ? "dark" : "light";
+        };
+        if (localStorage.theme === "dark") document.documentElement.classList.add("dark");
+
+        const settingsModal = document.getElementById("settingsModal");
+        const openSettings = () => {
+            settingsModal.classList.remove("hidden");
+            settingsModal.classList.add("flex");
+            document.getElementById("baseUrl").value = localStorage.baseUrl;
+            document.getElementById("apiKey").value = localStorage.apiKey || "";
+            document.getElementById("systemPrompt").value = localStorage.systemPrompt;
+        };
+        document.getElementById("openSettingsTop").onclick = openSettings;
+
+        const closeSettings = () => {
+            settingsModal.classList.add("hidden");
+            settingsModal.classList.remove("flex");
+        };
+
+        function saveSettings() {
+            localStorage.baseUrl = document.getElementById("baseUrl").value;
+            localStorage.apiKey = document.getElementById("apiKey").value;
+            localStorage.systemPrompt = document.getElementById("systemPrompt").value;
+            closeSettings();
+            updateBalance();
+        }
+        document.getElementById("saveSettingsBtn").onclick = saveSettings;
+
+        let models = JSON.parse(localStorage.models);
+        const modelSelect = document.getElementById("modelSelect");
+
+        function refreshModels() {
+            modelSelect.innerHTML = "";
+            models.forEach(m => {
+                const o = document.createElement("option");
+                o.value = m;
+                o.textContent = m;
+                modelSelect.appendChild(o);
+            });
+        }
+        refreshModels();
+
+        const chatEl = document.getElementById("chat");
+        let messages = JSON.parse(localStorage.chat || "[]");
+        let isTyping = false;
+
+        function renderChat() {
+            if (messages.length === 0) {
+                const t = translations[currentLang];
+                chatEl.innerHTML = `<div class="h-full flex flex-col items-center justify-center opacity-10 select-none"><i data-lucide="layout" class="w-20 h-20 mb-4"></i><span class="font-black text-3xl uppercase tracking-widest text-center">${t.welcome}</span></div>`;
+            } else {
+                chatEl.innerHTML = "";
+                messages.forEach((m) => {
+                    const isUser = m.role === "user";
+                    const div = document.createElement("div");
+                    div.className = `flex ${isUser ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`;
+                    const bubbleClasses = isUser ? 'bg-brand-500 text-white rounded-2xl rounded-tr-none shadow-md' : 'bg-white dark:bg-slate-800 pro-text-main rounded-2xl rounded-tl-none border border-slate-200 dark:border-slate-800 shadow-sm';
+                    div.innerHTML = `<div class="max-w-[85%] md:max-w-[75%] px-6 py-4 ${bubbleClasses}"><div class="prose dark:prose-invert text-[15px] leading-relaxed max-w-none font-sans">${marked.parse(m.content)}</div></div>`;
+                    chatEl.appendChild(div);
+                });
+            }
+            if (isTyping) {
+                const typing = document.createElement("div");
+                typing.className = "flex justify-start";
+                typing.innerHTML = `<div class="bg-slate-100 dark:bg-slate-800 px-5 py-4 rounded-2xl rounded-tl-none flex gap-1.5"><div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot"></div><div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot [animation-delay:0.2s]"></div><div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot [animation-delay:0.4s]"></div></div>`;
+                chatEl.appendChild(typing);
+            }
+            chatEl.scrollTop = chatEl.scrollHeight;
+            localStorage.chat = JSON.stringify(messages);
+            initIcons();
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById("messageInput");
+            const text = input.value.trim();
+            if (!text || isTyping) return;
+            messages.push({
+                role: "user",
+                content: text
+            });
+            input.value = "";
+            input.style.height = 'auto';
+            isTyping = true;
+            renderChat();
+            const reqMsgs = [{
+                role: "system",
+                content: localStorage.systemPrompt
+            }, ...messages];
+            try {
+                let chatUrl = localStorage.baseUrl.replace(/\/$/, '');
+                if (!chatUrl.endsWith('/v1')) chatUrl += '/v1';
+                chatUrl += '/chat/completions';
+
+                const res = await fetch(chatUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorage.apiKey}`
+                    },
+                    body: JSON.stringify({
+                        model: modelSelect.value,
+                        messages: reqMsgs
+                    })
+                });
+                if (!res.ok) throw new Error("Connection Error");
+                const data = await res.json();
+                messages.push({
+                    role: "assistant",
+                    content: data.choices[0].message.content
+                });
+            } catch (err) {
+                messages.push({
+                    role: "assistant",
+                    content: `**System Error:** Connection failed. Please check your settings.`
+                });
+            } finally {
+                isTyping = false;
+                renderChat();
+                setTimeout(updateBalance, 800);
+            }
+        }
+
+        document.getElementById("exportPDF").onclick = () => {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            if (currentLang === 'si') alert("Note: Sinhala PDF export requires custom fonts.");
+            let y = 20;
+            doc.setFontSize(20);
+            doc.text("AlokaHub Conversation", 20, y);
+            y += 15;
+            messages.forEach(m => {
+                doc.setFontSize(10);
+                doc.setFont("helvetica", "bold");
+                doc.text(`${m.role.toUpperCase()}:`, 20, y);
+                y += 7;
+                doc.setFont("helvetica", "normal");
+                const lines = doc.splitTextToSize(m.content.replace(/[#*`]/g, ''), 170);
+                doc.text(lines, 20, y);
+                y += (lines.length * 5) + 10;
+                if (y > 270) {
+                    doc.addPage();
+                    y = 20;
+                }
+            });
+            doc.save(`aloka-chat-${Date.now()}.pdf`);
+        };
+
+        document.getElementById("messageInput").addEventListener("input", function () {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
         });
-        doc.save(`aloka-chat-${Date.now()}.pdf`);
-    };
 
-    document.getElementById("messageInput").addEventListener("input", function() {
-        this.style.height = 'auto';
-        this.style.height = (this.scrollHeight) + 'px';
-    });
+        document.getElementById("sendBtn").onclick = sendMessage;
+        document.getElementById("messageInput").addEventListener("keydown", e => {
+            if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+        document.getElementById("clearChat").onclick = () => {
+            if (confirm(currentLang === 'si' ? "ඔබට විශ්වාසද?" : "Are you sure?")) {
+                messages = [];
+                renderChat();
+            }
+        };
 
-    document.getElementById("sendBtn").onclick = sendMessage;
-    document.getElementById("messageInput").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(); } });
-    document.getElementById("clearChat").onclick = () => { if(confirm(currentLang==='si'?"ඔබට විශ්වාසද?":"Are you sure?")) { messages = []; renderChat(); } };
-    
-    document.getElementById("langToggle").addEventListener('click', () => { if(messages.length === 0) renderChat(); });
+        document.getElementById("toggleApiKey").onclick = () => {
+            const keyInput = document.getElementById("apiKey");
+            const eyeIcon = document.getElementById("eyeIcon");
+            if (keyInput.type === "password") {
+                keyInput.type = "text";
+                eyeIcon.setAttribute("data-lucide", "eye-off");
+            } else {
+                keyInput.type = "password";
+                eyeIcon.setAttribute("data-lucide", "eye");
+            }
+            lucide.createIcons();
+        };
 
-    renderChat();
-</script>
+        updateLanguage();
+        renderChat();
+    </script>
 </body>
+
 </html>
