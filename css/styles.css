@@ -1,0 +1,187 @@
+/**
+ * STYLES (css/style.css)
+ * Core styling for AlokaHub Pro: Layout, Animations, and Custom Components.
+ */
+
+/* --- Base & Typography --- */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --brand-primary: #6366f1;
+    --brand-secondary: #4f46e5;
+}
+
+body {
+    font-family: 'Inter', 'Noto Sans Sinhala', sans-serif;
+    overflow: hidden;
+}
+
+/* --- Sidebar Collapse System --- */
+#sidebar {
+    width: 288px;
+    /* Default (w-72) */
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+
+/* --- Scrollbar Styling --- */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #334155;
+}
+
+/* --- Chat Components --- */
+.pro-text-main {
+    color: #0f172a;
+}
+
+.dark .pro-text-main {
+    color: #f1f5f9;
+}
+
+.typing-dot {
+    animation: typing 1.4s infinite ease-in-out;
+}
+
+@keyframes typing {
+
+    0%,
+    80%,
+    100% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    40% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+/* --- Search Tool Highlight --- */
+mark.search-highlight {
+    background-color: #fde047;
+    color: #000;
+    border-radius: 2px;
+    padding: 0 2px;
+}
+
+.dark mark.search-highlight {
+    background-color: #eab308;
+}
+
+/* --- File Upload Previews --- */
+#filePreviewContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.file-preview-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    font-size: 0.75rem;
+    color: #475569;
+}
+
+.dark .file-preview-item {
+    background: #1e293b;
+    border-color: #334155;
+    color: #cbd5e1;
+}
+
+.remove-file-btn {
+    color: #ef4444;
+    transition: transform 0.2s;
+}
+
+.remove-file-btn:hover {
+    transform: scale(1.2);
+}
+
+/* --- Markdown Rendering Tweaks --- */
+.prose pre {
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+    border-radius: 0.75rem;
+    border: 1px solid #334155;
+    padding: 1.25rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+}
+
+.prose code {
+    color: var(--brand-primary);
+    background-color: rgba(99, 102, 241, 0.1);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.9em;
+}
+
+.prose pre code {
+    color: inherit;
+    background-color: transparent;
+    padding: 0;
+}
+
+.prose img {
+    border-radius: 0.75rem;
+    max-height: 400px;
+    object-fit: contain;
+}
+
+/* --- Animation Utilities --- */
+.animate-in {
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+}
+
+@keyframes slideInFromTop {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.slide-in-from-top {
+    animation-name: slideInFromTop;
+}
+
+/* --- Welcome Screen --- */
+.welcome-container {
+    text-align: center;
+}
+
+.welcome-text {
+    font-weight: 800;
+    letter-spacing: 0.25em;
+    background: linear-gradient(to right, #6366f1, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
